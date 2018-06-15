@@ -16,16 +16,10 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.get('http://localhost:8000')
         
         self.assertIn('Test26', self.browser.title) 
-
-        inputbox = self.browser.find_element_by_id('number1')
-        self.assertEqual(
-            inputbox.get_attribute('placeholder'),
-            'you number'
-        )
-
-        inputbox.send_keys('10')
-        inputbox.send_keys(Keys.ENTER)
-      
+        
+        header_text = self.browser.find_element_by_tag_name('h1').text
+       
+        self.assertIn('quiz', header_text)
 
         self.fail('Finish the test!') 
 
