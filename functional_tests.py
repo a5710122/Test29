@@ -11,15 +11,19 @@ class NewVisitorTest(unittest.TestCase):
     def tearDown(self): 
         self.browser.quit()
 
-    def test_can_start_a_list_and_retrieve_it_later(self): 
+    def test_title_header(self): 
+        # ไก่เป็นนักศึกษาในคณะวิศวกรรมศาสตร์       
+        # เขาได้ยินการเข้าร่วมการตอปแปปสอปถามออนไลน์เพื่อแลกรางวัล
+        # เขาจึงเข้าไปดู homepage ของ แปปสอปถามออนไลน์
 
-        self.browser.get('http://localhost:8000')
+        self.browser.get('http://localhost:8000/quiz')
+        self.assertIn('quiz test29', self.browser.title) 
         
-        self.assertIn('Test26', self.browser.title) 
-        
+        # ในเว็ปแปปสอปถามออนไลน์ไก่ได้เห็นหัวข้อของคำถาม
+
         header_text = self.browser.find_element_by_tag_name('h1').text
-       
         self.assertIn('quiz', header_text)
+
 
         self.fail('Finish the test!') 
 
