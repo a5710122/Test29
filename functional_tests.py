@@ -14,16 +14,16 @@ class NewVisitorTest(unittest.TestCase):
 
     def test_webapp_by_user(self): 
         # ไก่เป็นนักศึกษาในคณะวิศวกรรมศาสตร์       
-        # เขาได้ยินการเข้าร่วมการตอบแบบสอบถามออนไลน์เพื่อแลกรางวัล
-        # เขาจึงเข้าไปดู homepage ของ แบบสอบถามออนไลน์
+        # เขาได้ยินการเข้าร่วมการตอบคำถามออนไลน์เพื่อแลกรางวัล
+        # เขาจึงเข้าไปดู homepage ของ เว็บคำถามออนไลน์
         self.browser.get('http://localhost:8000/quiz')
         self.assertIn('quiz test29', self.browser.title) 
         
-        # ในเว็ปแบบสอบถามออนไลน์ไก่ได้เห็นหัวข้อของคำถาม
+        # ในเว็บคำถามออนไลน์ไก่ได้เห็นหัวข้อของคำถาม
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('quiz', header_text)
         
-        #เมื่อไก่เห็นคำถามในเว็บแอปแบบสอบถามออนไลน์เขาจึงกดเข้าไปในคำถามแรก
+        #เมื่อไก่เห็นหัวข้อของคำถามในเว็บแอปคำถามออนไลน์เขาจึงกดเข้าไปในคำถามแรก
         self.browser.find_element_by_id('quiz_select1').click()
 
         #ไก่กดเลือกคำตอบแรก

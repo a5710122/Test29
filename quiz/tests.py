@@ -9,9 +9,7 @@ from .models import Question
 class QuestionModelTests(TestCase):
 
     def test_was_published_recently_with_future_question(self):
-        """
-               จะ return false กลับไปถ้า pub_data เป็นเวลาในอนาคต
-        """
+        """ จะ return false กลับไปถ้า pub_data เป็นเวลาในอนาคต เป็นการ test เวลาในการเผยแพร่คำถาม """
         time = timezone.now() + datetime.timedelta(days=30)
         future_question = Question(pub_date=time)
         self.assertIs(future_question.was_published_recently(), False)
