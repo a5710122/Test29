@@ -1,14 +1,15 @@
 <html>
     <head>
-        <title>Add question</title>
+        <title>Add and fix question</title>
     </head>
     <body>
         
        
-        <h1>Add question</h1>
+        <h1>Add and fix question</h1>
 
             <form action="add_question" method = "POST">
                Question:<br>
+               <input type="text" name="number_question_and_choice" placeholder="Number your Question"><br>
                <input type="text" name="new_text_question" placeholder="Your Question"><br><br>
                {% csrf_token %}
  
@@ -29,6 +30,7 @@
           <li> {{ choice1_text }} ( {{ choice1_true_false }} )</li>
           <li> {{ choice2_text }} ( {{ choice2_true_false }} )</li> </p>
                
+       <li><a href="/quiz/">Home page?</a></li>
            
 
     </body>
