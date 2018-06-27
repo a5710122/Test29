@@ -6,6 +6,7 @@
         
        
         <h1>quiz</h1>
+ 
            {% if latest_question_list %}
                <ul>
                {% for question in latest_question_list %}
@@ -13,8 +14,14 @@
                {% endfor %}
                </ul>
             {% else %}
-                <p>No polls are available.</p> 
+                <p>No quiz are available.</p> 
             {% endif %}
+
+         
+         </br>
+         </br>
+         <a href="add_question"> Add Question </a>
+      
 
     </body>
 </html>

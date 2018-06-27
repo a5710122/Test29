@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Add question</title>
+    </head>
+    <body>
+        
+       
+        <h1>Add question</h1>
+
+            <form action="add_question" method = "POST">
+               Question:<br>
+               <input type="text" name="new_text_question" placeholder="Your Question"><br><br>
+               {% csrf_token %}
+ 
+                <input type="text" name="new_text_choice1" placeholder="Your choice 1">
+                <input type="radio" name="choice1" value="True" checked> True
+                <input type="radio" name="choice1" value="False"> False<br>
+
+                <input type="text" name="new_text_choice2" placeholder="Your choice 2">
+                <input type="radio" name="choice2" value="True" checked> True
+                <input type="radio" name="choice2" value="False"> False<br><br>
+                
+                <input type="submit" value="Submit"><br>
+  
+            </form> 
+            
+        <h2> New Question </h2>
+       <p> {{ quest_text }} 
+          <li> {{ choice1_text }} ( {{ choice1_true_false }} )</li>
+          <li> {{ choice2_text }} ( {{ choice2_true_false }} )</li> </p>
+               
+           
+
+    </body>
+</html>
