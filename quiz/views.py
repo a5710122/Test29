@@ -7,8 +7,8 @@ from .models import Question, Choice
 from django.utils import timezone
 
 def index(request):
-    """ show question 5 sort by pubiher date """
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    """ show question 10 sort by pubiher date """
+    latest_question_list = Question.objects.order_by('-pub_date')[:10]
     context = {'latest_question_list': latest_question_list}
     return render(request, 'quiz/index.html', context)
 
@@ -22,7 +22,10 @@ def detail(request, question_id):
 def results(request, question_id):
     """ show number people ans of question """
     question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'quiz/results.html', {'question': question})
+    
+    ans = Choice.objects.all()
+   
+    return render(request, 'quiz/results.html', {'question': question, 'ans' : ans})
 
 
 def add_question(request):
@@ -34,7 +37,7 @@ def add_question(request):
     choice1_true_false = ""
     choice2_true_false = ""
     
-    
+    #pass value from html to control (python)
     if request.method == 'POST':
        new_text_question = request.POST['new_text_question']
        new_text_choice1 = request.POST['new_text_choice1']
@@ -43,20 +46,24 @@ def add_question(request):
        choice2_true_false = request.POST['choice2']
        primary = request.POST['number_question_and_choice']
        
-       if ((Question.objects.filter(question_text__startswith= new_text_question)) == True ):
-          q = Question(question_text= new_text_question, pub_date=timezone.now())
-          q.save()
-          q = Question.objects.get(pk=primary)
-          q.choice_set.create(choice_text=new_text_choice1, votes=0)
-          q.choice_set.create(choice_text=new_text_choice2, votes=0)
-
-       elif (Question.objects.filter(question_text__startswith= new_text_question)):
+       # Add and fix question and choice
+       if(Question.objects.filter(question_text__startswith = new_text_question)):
           q = Question.objects.get(pk=primary)
           q.question_text = new_text_question
           q.save()
-          q.choice_set.create(choice_text=new_text_choice1, votes=0)
-          q.choice_set.create(choice_text=new_text_choice2, votes=0)
+          q.choice_set.create(choice_text=new_text_choice1, ans=choice1_true_false, votes=0)
+          q.choice_set.create(choice_text=new_text_choice2, ans=choice2_true_false, votes=0)
+          
+
+       else:
+          q = Question(question_text= new_text_question, pub_date=timezone.now())
+          q.save()
+          q = Question.objects.get(pk=primary)
+          q.choice_set.create(choice_text=new_text_choice1, ans=choice1_true_false, votes=0)
+          q.choice_set.create(choice_text=new_text_choice2, ans=choice2_true_false, votes=0)
+    
        
+    # pass value form control (python) to html
     show_question = { 
                    'quest_text'   : new_text_question,
                    'choice1_text' : new_text_choice1,
@@ -65,10 +72,6 @@ def add_question(request):
                    'choice2_true_false' : choice2_true_false 
     }
     return render(request,'quiz/add_question.html',show_question )
-
-#def add_check_choice(request):
-        
-
 
 
 def vote(request, question_id):
@@ -85,5 +88,5 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
-
+        
         return HttpResponseRedirect(reverse('quiz:results', args=(question.id,)))

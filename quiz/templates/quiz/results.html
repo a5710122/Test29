@@ -4,15 +4,17 @@
    </head>
 
    <body>
-      <h1>results {{ question.question_text }}  is "{{ choice }}"</h1>
-   
+      
+      
+         <h1>results {{ question.question_text }} </h1>
+      
       <ul>
          {% for choice in question.choice_set.all %}
-         <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+         <li> Choice: {{ choice.choice_text }} is {{ choice.ans }} -- {{ choice.votes }} Ans </li>
          {% endfor %}
       </ul>
 
-      <p1> You have : {{ point }} <p1><br><br>
+      
 
       <li><a href="{% url 'quiz:detail' question.id %}" id="vote_again" >Ans again?</a></li>
 

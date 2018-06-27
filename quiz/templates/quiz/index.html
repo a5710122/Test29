@@ -5,12 +5,12 @@
     <body>
         
        
-        <h1>quiz</h1>
+        <h1>Quiz</h1>
  
            {% if latest_question_list %}
                <ul>
                {% for question in latest_question_list %}
-                   <li><a href="{% url 'quiz:detail' question.id %}" id="quiz_select1">{{ question.question_text }}</a></li>
+                   {{forloop.counter}}. <a href="{% url 'quiz:detail' question.id %}" id="quiz_select1">{{ question.question_text }}</a><br>
                {% endfor %}
                </ul>
             {% else %}
@@ -20,7 +20,7 @@
          
          </br>
          </br>
-         <a href="add_question"> Add Question </a>
+         <a href="add_question"> Add or Fix Question </a>
       
 
     </body>
