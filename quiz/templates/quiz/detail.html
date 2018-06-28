@@ -9,11 +9,13 @@
      {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
      <form action="{% url 'quiz:vote' question.id %}" method="post">
+        Your name: <input type="text" name="username" id="username" placeholder="Your name"><br>
         {% csrf_token %}
         {% for choice in question.choice_set.all %}
            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
         {% endfor %}
+        
         <input type="submit" id="vote" value="Vote" />
      </form>
 

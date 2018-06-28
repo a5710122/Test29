@@ -10,11 +10,13 @@
       
       <ul>
          {% for choice in question.choice_set.all %}
-         <li> Choice: {{ choice.choice_text }} is {{ choice.ans }} -- {{ choice.votes }} Ans </li>
+         <li> Choice: {{ choice.choice_text }} is {{ choice.ans }} <br> Number of people select choice {{ choice.votes }}   </li><br>
          {% endfor %}
       </ul>
 
-      
+      {% for i in username_show_html %}
+         <h2> {{forloop.counter}}. {{ username_show_html }} </h2>
+      {% endfor %}      
 
       <li><a href="{% url 'quiz:detail' question.id %}" id="vote_again" >Ans again?</a></li>
 

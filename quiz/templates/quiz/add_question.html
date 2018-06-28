@@ -1,27 +1,27 @@
 <html>
     <head>
-        <title>Add and fix question</title>
+        <title>Add question</title>
     </head>
     <body>
         
        
-        <h1>Add and fix question</h1>
+        <h1>Add question</h1>
 
             <form action="add_question" method = "POST">
                Question:<br>
-               <input type="text" name="number_question_and_choice" placeholder="Number your Question"><br>
-               <input type="text" name="new_text_question" placeholder="Your Question"><br><br>
+              
+               <input type="text" name="new_text_question" id="new_text_question" placeholder="Your Question"><br><br>
                {% csrf_token %}
  
-                <input type="text" name="new_text_choice1" placeholder="Your choice 1">
-                <input type="radio" name="choice1" value="True" checked> True
-                <input type="radio" name="choice1" value="False"> False<br>
+                <input type="text" name="new_text_choice1" id="new_text_choice1" placeholder="Your choice 1">
+                <input type="radio" name="choice1" value="True" id="choice1_true" > True
+                <input type="radio" name="choice1" value="False" id="choice1_false"> False<br>
 
-                <input type="text" name="new_text_choice2" placeholder="Your choice 2">
-                <input type="radio" name="choice2" value="True" checked> True
-                <input type="radio" name="choice2" value="False"> False<br><br>
+                <input type="text" name="new_text_choice2" id="new_text_choice2" placeholder="Your choice 2">
+                <input type="radio" name="choice2" value="True" id="choice2_true" > True
+                <input type="radio" name="choice2" value="False" id="choice2_false"> False<br><br>
                 
-                <input type="submit" value="Submit"><br>
+                <input type="submit" value="Submit" id="submit"><br>
   
             </form> 
             
@@ -31,7 +31,7 @@
              <li> {{ choice1_text }} ( {{ choice1_true_false }} )</li>
              <li> {{ choice2_text }} ( {{ choice2_true_false }} )</li> </p>
           </ul>     
-       <li><a href="/quiz/">Home page?</a></li>
+       <li><a href="/quiz/" id="back_home_page" >Home page?</a></li>
            
 
     </body>
