@@ -8,11 +8,14 @@
         <h1>Add question</h1>
 
             <form action="add_question" method = "POST">
+               Create question by:<br>
+                <input type="text" name="create_question_by" id="create_question_by" placeholder="Your name"><br><br>
+               {% csrf_token %}
+               
                Question:<br>
               
-               <input type="text" name="new_text_question" id="new_text_question" placeholder="Your Question"><br><br>
-               {% csrf_token %}
- 
+                <input type="text" name="new_text_question" id="new_text_question" placeholder="Your Question"><br><br>
+               
                 <input type="text" name="new_text_choice1" id="new_text_choice1" placeholder="Your choice 1">
                 <input type="radio" name="choice1" value="True" id="choice1_true" > True
                 <input type="radio" name="choice1" value="False" id="choice1_false"> False<br>
@@ -26,7 +29,7 @@
             </form> 
             
         <h2> New Question </h2>
-       <p> {{ quest_text }} 
+       <p> {{ quest_text }} Create by {{ create_question }}
           <ul>
              <li> {{ choice1_text }} ( {{ choice1_true_false }} )</li>
              <li> {{ choice2_text }} ( {{ choice2_true_false }} )</li> </p>

@@ -1,15 +1,21 @@
-import datetime
-
+from django.urls import resolve
 from django.test import TestCase
-from django.utils import timezone
+from django.http import HttpRequest
+from quiz.models import Question, Choice, User
 
-from .models import Question
 
+class HomePageTest(TestCase):
 
-class QuestionModelTests(TestCase):
+    def test_uses_home_template(self):
+        response = self.client.get('/quiz')
+        self.assertTemplateUsed(response, 'quiz/index.html')
 
-    def test_was_published_recently_with_future_question(self):
-        """ จะ return false กลับไปถ้า pub_data เป็นเวลาในอนาคต เป็นการ test เวลาในการเผยแพร่คำถาม """
-        time = timezone.now() + datetime.timedelta(days=30)
-        future_question = Question(pub_date=time)
-        self.assertIs(future_question.was_published_recently(), False)
+    def test_home_page_returns_correct_html(self):
+        response = self.client.get('/quiz')  
+
+        html = response.content.decode('utf8')  
+        self.assertTrue(html.startswith('<html>'))
+        self.assertIn('<title>quiz test29</title>', html)
+        self.assertTrue(html.strip().endswith('</html>'))
+
+        self.assertTemplateUsed(response, 'index.html')

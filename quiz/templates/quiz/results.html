@@ -6,17 +6,24 @@
    <body>
       
       
-         <h1>results {{ question.question_text }} </h1>
+         <h1>results {{ question.question_text }} Create by {{ question.create_question_by_text }}</h1>
       
       <ul>
          {% for choice in question.choice_set.all %}
-         <li> Choice: {{ choice.choice_text }} is {{ choice.ans }} <br> Number of people select choice {{ choice.votes }}   </li><br>
+         <li> Choice: <b>{{ choice.choice_text }}</b> is <b>{{ choice.ans }}</b> <br> Number of people select choice {{ choice.votes }}   </li><br>
          {% endfor %}
       </ul>
 
-      {% for i in username_show_html %}
-         <h2> {{forloop.counter}}. {{ username_show_html }} </h2>
-      {% endfor %}      
+      {% if username_show_html %}
+               <ul>
+               {% for user in username_show_html %}
+                   {{forloop.counter}}. {{ user.username }} you have point {{ user.user_point }}</a><br>
+               {% endfor %}
+               </ul>
+            {% else %}
+                <p>No quiz are available.</p> 
+            {% endif %}
+     
 
       <li><a href="{% url 'quiz:detail' question.id %}" id="vote_again" >Ans again?</a></li>
 
