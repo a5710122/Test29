@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Delete Question</title>
+    </head>
+    <body>
+        
+       
+        <h1>Delete Question</h1>
+        <h2>Question in webapp</h2>
+           {% if latest_question_list %}
+               <ul>
+               {% for question in latest_question_list %}
+                   {{forloop.counter}}. {{ question.question_text }}<br>
+               {% endfor %}
+               </ul>
+            {% else %}
+                <p1>No quiz are available.</p1><br><br>
+            {% endif %}
+
+         <h3>Delete Form</h3>
+             <form action="delete_question" method = "POST">
+               Create question by:<br>
+                <input type="text" name="create_question_by" id="create_question_by" placeholder="Your name"><br><br>
+               {% csrf_token %}
+               
+               Question:<br>
+              
+                <input type="text" name="delete_quest_text" id="delete_quest_text" placeholder="Your Question"><br><br>
+               
+                
+                <input type="submit" value="Submit" id="submit"><br>
+  
+            </form> 
+
+             
+             <h4> Delete Question </h4>
+       <p> Delete by: {{ create_question }}<br> 
+           Question delete: {{ delete_quest_text }} </p>
+     
+             <a href="/quiz/" id= "back_home">   Back to homePage ? </a><br>
+              
+             
+      
+
+    </body>
+</html>
